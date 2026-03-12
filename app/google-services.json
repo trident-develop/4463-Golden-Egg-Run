@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857749335369",
+    "project_id": "golden-egg-run",
+    "storage_bucket": "golden-egg-run.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857749335369:android:4f0da5aee9696f5bb6be98",
+        "android_client_info": {
+          "package_name": "com.pinger.textf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAkkmnWVjPdlcn-GrlI-hN73h7ytgSNyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
