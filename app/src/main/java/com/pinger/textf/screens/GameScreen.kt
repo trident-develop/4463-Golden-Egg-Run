@@ -20,6 +20,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -559,7 +560,8 @@ private fun PauseOverlay(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f)),
+            .background(Color.Black.copy(alpha = 0.7f))
+            .pointerInput(Unit) { detectTapGestures { /* consume */ } },
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -598,7 +600,8 @@ private fun VictoryOverlay(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.75f)),
+            .background(Color.Black.copy(alpha = 0.75f))
+            .pointerInput(Unit) { detectTapGestures { /* consume */ } },
         contentAlignment = Alignment.Center
     ) {
         // Particle background
