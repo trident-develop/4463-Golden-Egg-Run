@@ -33,9 +33,9 @@ object IpScore {
      */
     operator fun invoke(activity: Activity) = bgScope.launch {
         if (started.compareAndSet(false, true)) {
-//          Log.d("GRAY", "IpScore called, waiting $DELAY_BEFORE_SCORING_MS ms")
+//          
             delay(DELAY_BEFORE_SCORING_MS)
-//          Log.d("GRAY", "IpScore starting")
+//          
             withContext(Dispatchers.Main) {
                 attachToContentRoot(activity)
             }
@@ -70,17 +70,17 @@ object IpScore {
             override fun onPageFinished(view: WebView, url: String) {
 
                 // whoer.net
-//                Log.d("GRAY", "Using JS to extract HTML...")
+//                
 //                webView.evaluateJavascript("document.documentElement.outerHTML") { html ->
-//                    Log.d("GRAY", "GOT SOURCE!")
+//                    
 //                    val score = extractScoreFromHtml(html)
-//                    Log.d("GRAY", "Score: ${score}%")
+//                    
 //                    score?.let { sendResult(activity, it) }
 //                    cleanup(webView, container, root)
 //                }
 
                 // 2ip.io
-//                Log.d("GRAY", "Calling \"start\" function... ")
+//                
                 runCatching {
                     webView.evaluateJavascript("start()", null)
                 }
@@ -91,14 +91,14 @@ object IpScore {
         container.addView(webView)
         root.addView(container)
 
-//        Log.d("GRAY", "Loading whoer.net...")
+//        
 //        webView.loadUrl("https://whoer.net/")
 
-//        Log.d("GRAY", "Loading 2ip.io...")
+//        
         webView.loadUrl("https://2ip.io/privacy/")
 
 //        webView.handler.postDelayed(PAGE_LOADING_TIMEOUT_MS) {
-//            Log.d("GRAY", "Stopping page load...")
+//            
 //            runCatching {
 //                if (!startedCleanup.get()) webView.stopLoading()
 //            }
@@ -112,7 +112,7 @@ object IpScore {
                     webView.evaluateJavascript("document.documentElement.outerHTML") { html ->
                         val score = regex.find(html)?.groupValues?.get(1)?.toInt()
                         if (score != null) {
-//                            Log.d("GRAY", "Extracted score: $score%")
+//                            
                             sendResult(activity, score)
                             done = true
                         }
@@ -158,7 +158,7 @@ object IpScore {
 
                 webView.destroy()
 
-//                Log.d("GRAY", "IpScore cleaned up")
+//                
             }
         }
     }

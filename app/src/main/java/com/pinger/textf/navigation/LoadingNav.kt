@@ -66,7 +66,7 @@ fun LoadingGraph() {
 
                 when (val state = storageState) {
                     is StorageState.Loading -> {
-                        Log.d("TAGG", "Still initializing storage...")
+                        
                     }
                     is StorageState.Success -> {
                         val savedLink = state.data.link

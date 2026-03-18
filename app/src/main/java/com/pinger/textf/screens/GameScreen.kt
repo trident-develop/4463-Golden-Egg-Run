@@ -432,7 +432,7 @@ private fun ColorFlowBoard(
                             onStateChanged(newState)
 
                             if (isEndpoint) {
-                                Log.d("MYTAG", "Endpoint reached: $cell")
+                                
                                 vibrationHelper.vibrateShort()
                                 flashColor = ac
                             }

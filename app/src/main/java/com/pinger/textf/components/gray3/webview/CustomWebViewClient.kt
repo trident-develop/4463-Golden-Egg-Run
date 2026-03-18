@@ -110,13 +110,13 @@ class CustomWebViewClient(
         }
 
         if (url != null) {
-            Log.d("TAGG", "OnPageFinished")
+            
             if (url.startsWith("https://$BASE_URL_STRICT")) {
                 // Navigate to stub
-                Log.d("TAGG", "STUB")
+                
                 openStub()
             } else {
-                Log.d("TAGG", "Try to save $url")
+                
                 saveUrlIfNeeded(url)
                 (view as? CustomWebView)?.showWebView()
             }
@@ -130,9 +130,9 @@ class CustomWebViewClient(
             storageMutex.withLock {
                 val savedUrl = storage.getString(LINK_STORAGE_KEY)
                 if (savedUrl == null) {
-                    Log.d("TAGG", "Save ONE_TIME_FLAG")
+                    
                     storage.putString(ONE_TIME_FLAG, Random.nextBoolean().toString())
-                    Log.d("TAGG", "SAVED URL $url")
+                    
                     storage.putString(LINK_STORAGE_KEY, url)
                 }
             }

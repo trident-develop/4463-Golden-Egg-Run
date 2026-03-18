@@ -99,13 +99,13 @@ fun Gray3(
     }
 
     LaunchedEffect(isPushHandled, isStubTriggered) {
-        Log.d("TAGG", "PushHandled: $isPushHandled StubHandled: $isStubTriggered")
+        
         if (isPushHandled && isStubTriggered) {
-            Log.d("TAGG", "Go Stub")
+            
             CoroutineScope(Dispatchers.IO).launch {
-                Log.d("TAGG", "Save Stub TRUE")
+                
                 storageImpl.putString(STUB_STORAGE_KEY, STUB_STORAGE_VALUE_TRUE)
-                Log.d("TAGG", "Delete push token")
+                
                 try { FirebaseMessaging.getInstance().deleteToken() } catch (e: Exception) { }
             }
             toStub.value = true
@@ -113,10 +113,10 @@ fun Gray3(
     }
 
     LaunchedEffect(Unit) {
-        Log.d("TAGG", "Saved link: $savedLink")
+        
         val nonnulllink = savedLink.toString()
         if (nonnulllink != null.toString()) {
-            Log.d("TAGG", "open web")
+            
 
             withContext(Dispatchers.Main) {
                 activity?.let { webViewActivity ->
@@ -137,14 +137,14 @@ fun Gray3(
                 }
             }
         } else {
-            Log.d("TAGG", "Check saved Stub")
+            
             isStubTriggered = savedStub
             if(savedStub) {
                 return@LaunchedEffect
             }
-            Log.d("TAGG", "Go generate link")
+            
             withContext(Dispatchers.IO) {
-                Log.d("TAGG", "Register Pushes")
+                
                 push.registerDevice()
             }
             scope.launch {
@@ -152,31 +152,31 @@ fun Gray3(
                     if (ready) {
                         val data = PushIdStore.getReconstructedData()
                         if (data != null) {
-                            Log.d("TAGG", "getData from PushIdStore $data")
+                            
                             if(savedStub || data.adb == "1") {
-                                Log.d("TAGG", "Stub Catch")
+                                
                                 isStubTriggered = true
                                 return@collect
                             }
                             if(!context.isFruitConnected()) {
-                                Log.d("TAGG", "Internet FALSE")
+                                
                                 toNoInternet.value = true
                                 return@collect
                             }
                             val devProps = DevicePropertiesResult.create(context)
-                            Log.d("TAGG", "Internet TRUE")
+                            
                             val ref = data.ref
-                            Log.d("TAGG", "ref = $ref")
+                            
                             val gadid = data.gadid
-                            Log.d("TAGG", "gadid = $gadid")
+                            
                             val deviceModel = data.device
-                            Log.d("TAGG", "deviceModel = $deviceModel")
+                            
                             val firstTimeInstall = data.timeInstall
-                            Log.d("TAGG", "firstTimeInstall = $firstTimeInstall")
+                            
                             val utmSource = data.utmSource
-                            Log.d("TAGG", "utmSource = $utmSource")
+                            
                             val packageSource = data.packageSource
-                            Log.d("TAGG", "packageSource = $packageSource")
+                            
 
 
                             val finalUrl = UrlGenerator("https://${BASE_URL}")
@@ -197,7 +197,7 @@ fun Gray3(
                                 .addQuery(INSTALL_A11Y_KEY, devProps.getS30())
                                 .build()
 
-                            Log.d("TAGG", "start web: $finalUrl")
+                            
                             withContext(Dispatchers.Main) {
                                 activity?.let { webViewActivity ->
                                     val customWebView = CustomWebView(webViewActivity)

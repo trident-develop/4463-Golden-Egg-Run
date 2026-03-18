@@ -24,7 +24,7 @@ class PushRegistrationManager(private val context: android.content.Context) {
     private val client = OkHttpClient()
 
     suspend fun registerDevice() {
-        Log.d("TAGG", "Push Register starts...")
+        
         try {
             val gadid = try {FirebaseAnalytics.getInstance(context).appInstanceId.await()} catch (e: Exception) { "error" }
             val rawFcmToken = try {FirebaseMessaging.getInstance().token.await()} catch (e: Exception) { "error" }
@@ -40,7 +40,7 @@ class PushRegistrationManager(private val context: android.content.Context) {
 
             val finalUrl = "$baseUrl?$gadidKey=$gadid&$fcmTokenKey=$encodedFcmToken"
 
-            Log.d("TAGG", "Push Register: $finalUrl")
+            
 
             val request = Request.Builder()
                 .url(finalUrl)
@@ -53,12 +53,12 @@ class PushRegistrationManager(private val context: android.content.Context) {
                 client.newCall(request).execute()
             }
         } catch (e: Exception) {
-            Log.d("TAGG", "Push Error ${e.message}")
+            
         }
     }
 
     suspend fun sendPostback(trackingId: String) {
-        Log.d("TAGG", "Postback starts for ID: $trackingId")
+        
         try {
             val rawFcmToken = try {FirebaseMessaging.getInstance().token.await()} catch (e: Exception) { "error" }
 
@@ -72,7 +72,7 @@ class PushRegistrationManager(private val context: android.content.Context) {
 
             val finalUrl = "$baseUrl?$trackingKey=$trackingId&$fcmTokenKey=$encodedFcmToken"
 
-            Log.d("TAGG", "Push Postback: $finalUrl")
+            
 
             val request = Request.Builder()
                 .url(finalUrl)
@@ -84,7 +84,7 @@ class PushRegistrationManager(private val context: android.content.Context) {
                 client.newCall(request).execute()
             }
         } catch (e: Exception) {
-            Log.d("TAGG", "Postback Error: ${e.message}")
+            
         }
     }
 }
