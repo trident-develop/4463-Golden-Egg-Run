@@ -7,6 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
+import com.pinger.textf.audio.Audio
+import com.pinger.textf.components.gray3.storage.StorageImpl
 import com.pinger.textf.navigation.LoadingGraph
 
 class LoadingActivity : ComponentActivity() {
@@ -21,6 +24,9 @@ class LoadingActivity : ComponentActivity() {
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         controller?.hide(WindowInsetsCompat.Type.systemBars())
         enableEdgeToEdge()
+
+        val storage =  StorageImpl.getInstance(this)
+        Audio.enqueue(this, lifecycleScope, storage, this.intent)
 
         setContent {
             LoadingGraph()
